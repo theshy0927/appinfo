@@ -19,9 +19,8 @@ public class DevUserService {
      * @param user
      * @return
      */
-    public Boolean devLogin(DevUser user){
-        DevUser devUser = devUserMapper.selectOne(user);
-        return devUser != null;
+    public DevUser devLogin(DevUser user){
+        return devUserMapper.selectOne(user);
     }
 
 }
