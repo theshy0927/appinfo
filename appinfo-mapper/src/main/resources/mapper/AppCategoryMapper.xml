@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.t248.appinfo.mapper.AppCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.t248.appinfo.model.AppCategory">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="categoryCode" jdbcType="VARCHAR" property="categorycode" />
+    <result column="categoryName" jdbcType="VARCHAR" property="categoryname" />
+    <result column="parentId" jdbcType="BIGINT" property="parentid" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+  </resultMap>
+</mapper>

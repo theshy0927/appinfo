@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.t248.appinfo.mapper.DataDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.t248.appinfo.model.DataDictionary">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="typeCode" jdbcType="VARCHAR" property="typecode" />
+    <result column="typeName" jdbcType="VARCHAR" property="typename" />
+    <result column="valueId" jdbcType="BIGINT" property="valueid" />
+    <result column="valueName" jdbcType="VARCHAR" property="valuename" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+  </resultMap>
+</mapper>
