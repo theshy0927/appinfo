@@ -4,6 +4,7 @@ package com.t248.appinfo.web.controller;
 import com.t248.appinfo.model.DevUser;
 import com.t248.appinfo.service.DevUserService;
 import com.t248.appinfo.utils.AppinfoCode;
+import com.t248.appinfo.utils.AppinfoException;
 import com.t248.appinfo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,20 @@ public class LoginController {
 
     @RequestMapping("devlogin.html")
     public String devlogin(){
-        return "devlogin";
+        return "login";
     }
 
 
-
+    @RequestMapping("logout")
+    public String loginOut(HttpServletRequest request){
+        Object devUser = request.getSession().getAttribute("devUser");
+        if (devUser!=null) {
+            request.removeAttribute("devUser");
+        }else {
+            throw new AppinfoException(AppinfoCode.not_login);
+        }
+        System.out.println(devUser);
+            return "/index";
+    }
 
 }

@@ -1,29 +1,41 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:include="dev/common/header::head">
-	<title>欢迎</title>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>APP管理系统</title>
+    <!-- css -->
+    <link th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/css/nprogress.css}" href="../static/css/nprogress.css" rel="stylesheet">
+    <link th:href="@{/css/green.css}" href="../static/css/green.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}" href="../static/css/bootstrap-progressbar-3.3.4.min.css"
+          rel="stylesheet">
+    <link th:href="@{/css/jqvmap.min.css}" href="../static/css/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/dropzone.min.css}" href="../static/css/dropzone.min.css" rel="stylesheet">
+    <link th:href="@{/css/custom.min.css}" href="../static/css/custom.min.css" rel="stylesheet">
+    <!-- Custom Style -->
+    <link th:href="@{/localcss/crmadd.css}" href="../static/localcss/crmadd.css" rel="stylesheet">
+    <link th:href="@{/localcss/crmlist.css}" href="../static/localcss/crmlist.css" rel="stylesheet">
 </head>
-<body>
-<div>
-<div th:include="dev/common/header::containerBody"></div>
-	<!-- /top navigation -->
-	<div class="right_col" role="main">
-		<div class="">
-
-<div class="page-title">
-	<div class="title_left">
-		<h3>
-			欢迎你：<span th:text="${session.devUser.devname}"></span><strong> | 角色：开发者账户</strong>
-		</h3>
-	</div>
+<body class="nav-md footer_fixed">
+<div class="container body">
+    <div class="main_container">
+   <div th:include="dev/common/left :: left" class="col-md-3 left_col menu_fixed"></div>
+        <div th:include="dev/common/header :: header" class="top_nav"></div>
+        <div layout:fragment="content" class="right_col" role="main"></div>
+        <footer th:include="dev/common/footer :: footer"></footer>
+    </div>
 </div>
-<div class="clearfix"></div>
-
-</div>
-	</div>
-</div>
-<!-- /page content -->
-<!-- footer content -->
-<div th:include="dev/common/footer::ff"></div>
 </body>
+<!--js -->
+<script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/fastclick.js}" src="../static/js/fastclick.js"></script>
+<script th:src="@{/js/nprogress.js}" src="../static/js/nprogress.js"></script>
+<script th:src="@{/js/jquery.mCustomScrollbar.concat.min.js}"
+        src="../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script th:src="@{/js/dropzone.js}" src="../static/js/dropzone.js"></script>
+<script th:src="@{/js/custom.min.js}" src="../static/js/custom.min.js"></script>
+<script layout:fragment="js"></script>
 </html>
