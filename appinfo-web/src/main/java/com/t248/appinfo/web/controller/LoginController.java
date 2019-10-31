@@ -46,11 +46,7 @@ public class LoginController {
         return "devlogin";
     }
 
-    @RequestMapping("test")
-    @ResponseBody
-    public String test(){
-        return "{\"meg\":\"ok\"}";
-    }
+
 
 
 }
