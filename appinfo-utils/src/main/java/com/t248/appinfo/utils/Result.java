@@ -1,5 +1,6 @@
 package com.t248.appinfo.utils;
 
+
 public class Result {
 
     private Integer code;

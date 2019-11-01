@@ -23,6 +23,18 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.t248</groupId>
+            <artifactId>appinfo-model</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.t248</groupId>
+            <artifactId>appinfo-utils</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
@@ -73,12 +85,7 @@
             </exclusions>
         </dependency>
 
-        <!-- 依赖model -->
-        <dependency>
-            <groupId>com.t248</groupId>
-            <artifactId>appinfo-model</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+
 
     </dependencies>
 

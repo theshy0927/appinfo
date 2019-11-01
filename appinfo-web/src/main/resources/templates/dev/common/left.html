@@ -24,7 +24,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2 th:text="${session.devUser.devname}"></h2>
+                <h2 th:text="${session.devUser.devName}"></h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -34,16 +34,13 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-                <h3 th:text="${session.devUser.devname}">用户名</h3>
+                <h3 th:text="${session.devUser.devName}">用户名</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-edit"></i> 权限管理 <span
+                    <li><a><i class="fa fa-edit"></i> APP应用管理 <span
                             class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="/user/list" th:href="@{/user/list}">用户管理</a>
-                            </li>
-                            <li>
-                                <a href="/role/list" th:href="@{/role/list}">角色管理</a>
+                                <a href="/dev/list" th:href="@{/dev/list}">APP维护</a>
                             </li>
                         </ul>
                     </li>

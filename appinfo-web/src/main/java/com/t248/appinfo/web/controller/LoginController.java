@@ -25,8 +25,8 @@ public class LoginController {
     @RequestMapping(value = "devLogin" , method = RequestMethod.GET)
     public Result devLogin(HttpServletRequest request, @RequestParam("devCode")String devCode, @RequestParam("devPassword")String devPassword){
         DevUser user = new DevUser();
-        user.setDevcode(devCode);
-        user.setDevpassword(devPassword);
+        user.setDevCode(devCode);
+        user.setDevPassword(devPassword);
         user = devUserService.devLogin(user);
         boolean bool = user != null;
         if(bool){

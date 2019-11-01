@@ -6,15 +6,15 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="appId" jdbcType="BIGINT" property="appid" />
-    <result column="adPicPath" jdbcType="VARCHAR" property="adpicpath" />
-    <result column="adPV" jdbcType="BIGINT" property="adpv" />
-    <result column="carouselPosition" jdbcType="INTEGER" property="carouselposition" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
-    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
-    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="appId" jdbcType="BIGINT" property="appId" />
+    <result column="adPicPath" jdbcType="VARCHAR" property="adPicPath" />
+    <result column="adPV" jdbcType="BIGINT" property="adPV" />
+    <result column="carouselPosition" jdbcType="INTEGER" property="carouselPosition" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
   </resultMap>
 </mapper>

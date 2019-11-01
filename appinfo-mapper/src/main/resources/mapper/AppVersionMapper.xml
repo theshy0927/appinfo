@@ -6,17 +6,17 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="appId" jdbcType="BIGINT" property="appid" />
-    <result column="versionNo" jdbcType="VARCHAR" property="versionno" />
-    <result column="versionInfo" jdbcType="VARCHAR" property="versioninfo" />
-    <result column="publishStatus" jdbcType="BIGINT" property="publishstatus" />
-    <result column="downloadLink" jdbcType="VARCHAR" property="downloadlink" />
-    <result column="versionSize" jdbcType="DECIMAL" property="versionsize" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
-    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
-    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
-    <result column="apkLocPath" jdbcType="VARCHAR" property="apklocpath" />
-    <result column="apkFileName" jdbcType="VARCHAR" property="apkfilename" />
+    <result column="appId" jdbcType="BIGINT" property="appId" />
+    <result column="versionNo" jdbcType="VARCHAR" property="versionNo" />
+    <result column="versionInfo" jdbcType="VARCHAR" property="versionInfo" />
+    <result column="publishStatus" jdbcType="BIGINT" property="publishStatus" />
+    <result column="downloadLink" jdbcType="VARCHAR" property="downloadLink" />
+    <result column="versionSize" jdbcType="DECIMAL" property="versionSize" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="apkLocPath" jdbcType="VARCHAR" property="apkLocPath" />
+    <result column="apkFileName" jdbcType="VARCHAR" property="apkFileName" />
   </resultMap>
 </mapper>

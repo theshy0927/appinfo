@@ -1,33 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.t248.appinfo.mapper.AppInfoMapper">
-  <resultMap id="BaseResultMap" type="com.t248.appinfo.model.AppInfo">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="softwareName" jdbcType="VARCHAR" property="softwarename" />
-    <result column="APKName" jdbcType="VARCHAR" property="apkname" />
-    <result column="supportROM" jdbcType="VARCHAR" property="supportrom" />
-    <result column="interfaceLanguage" jdbcType="VARCHAR" property="interfacelanguage" />
-    <result column="softwareSize" jdbcType="DECIMAL" property="softwaresize" />
-    <result column="updateDate" jdbcType="DATE" property="updatedate" />
-    <result column="devId" jdbcType="BIGINT" property="devid" />
-    <result column="appInfo" jdbcType="VARCHAR" property="appinfo" />
-    <result column="status" jdbcType="BIGINT" property="status" />
-    <result column="onSaleDate" jdbcType="TIMESTAMP" property="onsaledate" />
-    <result column="offSaleDate" jdbcType="TIMESTAMP" property="offsaledate" />
-    <result column="flatformId" jdbcType="BIGINT" property="flatformid" />
-    <result column="categoryLevel3" jdbcType="BIGINT" property="categorylevel3" />
-    <result column="downloads" jdbcType="BIGINT" property="downloads" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
-    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
-    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
-    <result column="categoryLevel1" jdbcType="BIGINT" property="categorylevel1" />
-    <result column="categoryLevel2" jdbcType="BIGINT" property="categorylevel2" />
-    <result column="logoPicPath" jdbcType="VARCHAR" property="logopicpath" />
-    <result column="logoLocPath" jdbcType="VARCHAR" property="logolocpath" />
-    <result column="versionId" jdbcType="BIGINT" property="versionid" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.t248.appinfo.model.AppInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="softwareName" jdbcType="VARCHAR" property="softwareName" />
+        <result column="APKName" jdbcType="VARCHAR" property="APKName" />
+        <result column="supportROM" jdbcType="VARCHAR" property="supportROM" />
+        <result column="interfaceLanguage" jdbcType="VARCHAR" property="interfaceLanguage" />
+        <result column="softwareSize" jdbcType="DECIMAL" property="softwareSize" />
+        <result column="updateDate" jdbcType="DATE" property="updateDate" />
+        <result column="devId" jdbcType="BIGINT" property="devId" />
+        <result column="appInfo" jdbcType="VARCHAR" property="appInfo" />
+        <result column="status" jdbcType="BIGINT" property="status" />
+        <result column="onSaleDate" jdbcType="TIMESTAMP" property="onSaleDate" />
+        <result column="offSaleDate" jdbcType="TIMESTAMP" property="offSaleDate" />
+        <result column="flatformId" jdbcType="BIGINT" property="flatformId" />
+        <result column="categoryLevel3" jdbcType="BIGINT" property="categoryLevel3" />
+        <result column="downloads" jdbcType="BIGINT" property="downloads" />
+        <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+        <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+        <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+        <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+        <result column="categoryLevel1" jdbcType="BIGINT" property="categoryLevel1" />
+        <result column="categoryLevel2" jdbcType="BIGINT" property="categoryLevel2" />
+        <result column="logoPicPath" jdbcType="VARCHAR" property="logoPicPath" />
+        <result column="logoLocPath" jdbcType="VARCHAR" property="logoLocPath" />
+        <result column="versionId" jdbcType="BIGINT" property="versionId" />
+    </resultMap>
+
+  <select id="findApp" parameterType="com.t248.appinfo.model.AppInfo" resultType="com.t248.appinfo.dto.AppinfoDTO">
+        SELECT ai.id,`softwareName`,`APKName`,`softwareSize`,
+(SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`flatformId` AND typeCode="APP_FLATFORM" ) AS flatformName,
+(SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`status` AND typeCode="APP_STATUS") AS statusName,
+(SELECT	 categoryName FROM app_category AS ac WHERE ac.id =  ai.`categoryLevel1` ) AS cname1,
+(SELECT	 categoryName FROM app_category AS ac WHERE ac.id =  ai.`categoryLevel2`) AS cname2,
+(SELECT	 categoryName FROM app_category AS ac WHERE  ac.id = ai.`categoryLevel3` ) AS cname3,
+`downloads`,
+(SELECT `versionNO` FROM  app_version AS v WHERE v.id = ai.`versionId`) AS versionName
+ FROM app_info AS ai
+ <where>
+
+   <if test="createdBy!=null and createdBy!=''">
+     and createdBy = #{createdBy}
+   </if>
+   <if test="querySoftwareName!=null and querySoftwareName!=''">
+     and softwareName like concat("%",#{querySoftwareName},"%")
+   </if>
+   <if test="queryStatus!=null and queryStatus!=0">
+     and status=#{queryStatus}
+   </if>
+   <if test="queryFlatformId!=null and queryFlatformId!=0">
+     and flatformId=  #{queryFlatformId}
+   </if>
+   <if test="queryCategoryLevel1!=null and queryCategoryLevel1!=0">
+     and categoryLevel1=#{queryCategoryLevel1}
+   </if>
+   <if test="queryCategoryLevel2!=null and queryCategoryLevel2!=0">
+     and categoryLevel2=#{queryCategoryLevel2}
+   </if>
+   <if test="queryCategoryLevel3!=null and queryCategoryLevel3!=0">
+     and categoryLevel3=#{queryCategoryLevel3}
+   </if>
+ </where>
+
+  </select>
+
+
+  <select id="getAllCategory" resultType="com.t248.appinfo.dto.CategoryDTO">
+    SELECT DISTINCT  ac.`id`,ac.`categoryName`,ac.`parentId` FROM app_info AS ai,app_category AS ac
+     WHERE ac.`id` = ${cateLevel}
+      <if test="parentId != null and parentId != 0">
+        and ac.`parentId` = #{parentId}
+      </if>
+  </select>
+
+  <select id="getFlaform" resultType="com.t248.appinfo.model.DataDictionary">
+        SELECT *  FROM `data_dictionary`
+         <if test="typeCode!=null and typeCode==0">
+             `typeCode`=#{typeCode}
+         </if>
+
+
+  </select>
+
 </mapper>

@@ -1,0 +1,16 @@
+spring:
+  ##### redis 配置开始  #####
+  redis:
+    database: 0
+    host: 192.168.42.128
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 10
+        max-wait: -1
+        max-active: 200
+        min-idle: 0
+    timeout: 1000
+    password: 123456
+    ##### redis 配置结束 #####
+

@@ -6,12 +6,13 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="categoryCode" jdbcType="VARCHAR" property="categorycode" />
-    <result column="categoryName" jdbcType="VARCHAR" property="categoryname" />
-    <result column="parentId" jdbcType="BIGINT" property="parentid" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
-    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
-    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="categoryCode" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+    <result column="parentId" jdbcType="BIGINT" property="parentId" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="catelevel" jdbcType="INTEGER" property="catelevel" />
   </resultMap>
 </mapper>

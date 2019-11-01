@@ -2,8 +2,8 @@ package com.t248.appinfo.model;
 
 import lombok.Data;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Table(name = "dev_user")
@@ -19,55 +19,58 @@ public class DevUser {
      * 开发者帐号
      */
     @Column(name = "devCode")
-    private String devcode;
+    private String devCode;
 
     /**
      * 开发者名称
      */
     @Column(name = "devName")
-    private String devname;
+    private String devName;
 
     /**
      * 开发者密码
      */
     @Column(name = "devPassword")
-    private String devpassword;
+    private String devPassword;
 
     /**
      * 开发者电子邮箱
      */
     @Column(name = "devEmail")
-    private String devemail;
+    private String devEmail;
 
     /**
      * 开发者简介
      */
     @Column(name = "devInfo")
-    private String devinfo;
+    private String devInfo;
 
     /**
      * 创建者（来源于backend_user用户表的用户id）
      */
     @Column(name = "createdBy")
-    private Long createdby;
+    private Long createdBy;
 
     /**
      * 创建时间
      */
     @Column(name = "creationDate")
-    private Date creationdate;
+    private Date creationDate;
 
     /**
      * 更新者（来源于backend_user用户表的用户id）
      */
     @Column(name = "modifyBy")
-    private Long modifyby;
+    private Long modifyBy;
 
     /**
      * 最新更新时间
      */
     @Column(name = "modifyDate")
-    private Date modifydate;
+    private Date modifyDate;
+
+
+
 
 
 }

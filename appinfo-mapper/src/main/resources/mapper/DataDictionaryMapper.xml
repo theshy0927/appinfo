@@ -6,13 +6,13 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="typeCode" jdbcType="VARCHAR" property="typecode" />
-    <result column="typeName" jdbcType="VARCHAR" property="typename" />
-    <result column="valueId" jdbcType="BIGINT" property="valueid" />
-    <result column="valueName" jdbcType="VARCHAR" property="valuename" />
-    <result column="createdBy" jdbcType="BIGINT" property="createdby" />
-    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
-    <result column="modifyBy" jdbcType="BIGINT" property="modifyby" />
-    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="typeCode" jdbcType="VARCHAR" property="typeCode" />
+    <result column="typeName" jdbcType="VARCHAR" property="typeName" />
+    <result column="valueId" jdbcType="BIGINT" property="valueId" />
+    <result column="valueName" jdbcType="VARCHAR" property="valueName" />
+    <result column="createdBy" jdbcType="BIGINT" property="createdBy" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="modifyBy" jdbcType="BIGINT" property="modifyBy" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate" />
   </resultMap>
 </mapper>
