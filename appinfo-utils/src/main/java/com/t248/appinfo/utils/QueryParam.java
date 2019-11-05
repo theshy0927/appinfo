@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class QueryParam {
 
-    
+    private Long id;
      private String   querySoftwareName;
             private Long queryStatus;
         private Long queryFlatformId;

@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <!-- css -->
-    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet"/>
-    <link th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" rel="stylesheet">
-    <link th:href="@{/css/nprogress.css}" href="../static/css/nprogress.css" rel="stylesheet">
-    <link th:href="@{/css/green.css}" href="../static/css/green.css" rel="stylesheet">
-    <link th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}" href="../static/css/bootstrap-progressbar-3.3.4.min.css"
+    <link th:href="@{css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{css/nprogress.css}" href="../static/css/nprogress.css" rel="stylesheet">
+    <link th:href="@{css/green.css}" href="../static/css/green.css" rel="stylesheet">
+    <link th:href="@{css/bootstrap-progressbar-3.3.4.min.css}" href="../static/css/bootstrap-progressbar-3.3.4.min.css"
           rel="stylesheet">
-    <link th:href="@{/css/jqvmap.min.css}" href="../static/css/jqvmap.min.css" rel="stylesheet"/>
-    <link th:href="@{/css/dropzone.min.css}" href="../static/css/dropzone.min.css" rel="stylesheet">
-    <link th:href="@{/css/custom.min.css}" href="../static/css/custom.min.css" rel="stylesheet">
+    <link th:href="@{css/jqvmap.min.css}" href="../static/css/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{css/dropzone.min.css}" href="../static/css/dropzone.min.css" rel="stylesheet">
+    <link th:href="@{css/custom.min.css}" href="../static/css/custom.min.css" rel="stylesheet">
 </head>
 <body class="login">
 <div>
@@ -25,13 +25,13 @@
                 <form  method="post" id="login">
                     <h1>欢迎登陆</h1>
                     <div>
-                        <input type="text" class="form-control" id="devCode" name="devCode" placeholder="用户名" required="" value="test001"/>
+                        <input type="text" class="form-control" id="userCode" name="userCode" placeholder="用户名" required="" value="admin"/>
                     </div>
                     <div>
-                        <input type="password" class="form-control" id="devPassword" name="devPassword" placeholder="密码" value="123456" required="" />
+                        <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="密码" value="123456" required="" />
                     </div>
                     <div>
-                        <button type="button" onclick="login('dev')" class="btn btn-success">登    录</button>
+                        <button type="button" onclick="login('backend')" class="btn btn-success">登    录</button>
                         <button type="reset" class="btn btn-default">重    置</button>
                     </div>
 
@@ -92,7 +92,7 @@
                 "data":params,
                 "success":function (data){
                     if (data.code===200){
-                        window.location.href=getRootPath()+"/"+"dev/main.html";
+                        window.location.href=getRootPath()+"/"+"backend/main.html";
                     }else{
                         alert(data.message);
                     }

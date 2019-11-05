@@ -7,6 +7,8 @@ import com.google.common.collect.Lists;
 import com.t248.appinfo.dto.AppinfoDTO;
 import com.t248.appinfo.dto.CategoryDTO;
 import com.t248.appinfo.mapper.AppInfoMapper;
+import com.t248.appinfo.mapper.AppVersionMapper;
+import com.t248.appinfo.model.AppVersion;
 import com.t248.appinfo.model.DataDictionary;
 import com.t248.appinfo.service.AppinfoService;
 import com.t248.appinfo.web.config.RedisUtils;
@@ -31,6 +33,9 @@ public  class AppinfoWebApplicationTests {
     @Autowired
     private AppInfoMapper mapper;
 
+
+    @Autowired
+    private AppVersionMapper versionMapper;
 
 
     @Test
@@ -65,7 +70,7 @@ public  class AppinfoWebApplicationTests {
 
     @Test
     public void getAllCategory(){
-        List<CategoryDTO> categorylevel1 = mapper.getAllCategory(1L, "categorylevel2");
+        List<CategoryDTO> categorylevel1 = mapper.getAppInfoCategory(1L, "categorylevel2");
         System.out.println(categorylevel1);
     }
 
@@ -80,18 +85,18 @@ public  class AppinfoWebApplicationTests {
 
     @Test
     public void allCategory(){
-        List<CategoryDTO> categorylevel1 = service.getAllCategory(null, "categorylevel1");
+        List<CategoryDTO> categorylevel1 = service.getAppInfoCategory(null, "categorylevel1");
         List<CategoryDTO> categorylevel2 = new ArrayList<>();
         List<CategoryDTO> categorylevel3 = new ArrayList<>();
         utils.set("c1", categorylevel1);
         for (CategoryDTO c1 : categorylevel1){
             c1.setNextLevel("c1");
-            List<CategoryDTO> templevel2 = service.getAllCategory(c1.getId(), "categorylevel2");
+            List<CategoryDTO> templevel2 = service.getAppInfoCategory(c1.getId(), "categorylevel2");
             c1.setChildCategory(templevel2.stream().map(CategoryDTO::getId).collect(Collectors.toList()));
             for (CategoryDTO c2 : templevel2){
                 categorylevel2.add(c2);
                 c1.setNextLevel("c2");
-                List<CategoryDTO> templevel3 = service.getAllCategory(c2.getId(), "categorylevel3");
+                List<CategoryDTO> templevel3 = service.getAppInfoCategory(c2.getId(), "categorylevel3");
                 c2.setChildCategory(templevel3.stream().map(CategoryDTO::getId).collect(Collectors.toList()));
                 for (CategoryDTO c3 : templevel3){
                     c3.setNextLevel(null);
@@ -104,4 +109,19 @@ public  class AppinfoWebApplicationTests {
         utils.set("c3", categorylevel3);
     }
 
+
+
+    @Test
+    public void version(){
+        AppVersion version = new AppVersion();
+        version.setAppId(56L);
+        List<AppVersion> select = versionMapper.select(version);
+        System.out.println(select);
+    }
+
+    @Test
+    public void a(){
+        List<DataDictionary> dataDictionary = (List<DataDictionary>) utils.get("dataDictionary");
+
+    }
 }

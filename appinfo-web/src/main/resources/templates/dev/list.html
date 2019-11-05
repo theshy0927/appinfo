@@ -36,7 +36,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form method="post" action="/dev/list" th:action="@{/dev/list}">
+                        <form method="post" action="/dev/list.html" th:action="@{/dev/list.html}">
                             <input type="hidden" name="createdBy" th:value="${session.devUser.id}"/>
                             <ul>
                                 <li>
@@ -116,6 +116,7 @@
                 <div class="x_panel">
 
                     <div class="x_content">
+                        <a th:href="@{/dev/add.html}" style="text-decoration: none"><button type="button" style="background-color: #4cae4c" class="btn btn-default">新增APP</button></a>
 
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
                                cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
@@ -155,7 +156,7 @@
                                     最新版本号</th>
                                 <th class="sorting" tabindex="0"
                                     aria-controls="datatable-responsive" rowspan="1" colspan="1"
-                                    style="width: 124px;"
+
                                     aria-label="Last name: activate to sort column ascending">
                                     操作</th>
                             </tr>
@@ -173,6 +174,9 @@
                                 <td th:text="${l.downloads}"></td>
                                 <td th:text="${l.versionName}"></td>
                                 <td>
+
+
+
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-danger">点击操作</button>
                                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -180,16 +184,17 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a class="addVersion" th:data-id="${l.id}"  data-toggle="tooltip" data-placement="top"  data-original-title="新增APP版本信息">新增版本</a>
+
+                                            <li th:if="${l.statusName=='待审核'||l.statusName=='审核未通过'||l.statusName=='已下架'}"><a   th:data-status="${l.statusName}" class="modifyAppInfo" th:href="@{'/dev/edit/'+${l.id}+'.html'}"
+                                                    data-toggle="tooltip" data-placement="top" title="" data-original-title="修改APP基础信息">修改</a></li>
+                                            <li><a class="addVersion" th:href="@{'/dev/versionadd/'+${l.id}+'.html'}" data-toggle="tooltip" data-placement="top" title="" data-original-title="新增APP版本信息">新增版本</a>
                                             </li>
+                                            <li><a  class="viewApp"  th:href="@{'/dev/view/'+${l.id}+'.html'}"  data-toggle="tooltip" data-placement="top" title="" data-original-title="查看APP基础信息以及全部版本信息">查看</a></li>
+                                            <li><a  class="deleteApp" th:appinfoid="${l.id }" th:appsoftwarename="${l.softwareName }" data-toggle="tooltip" data-placement="top" title="" data-original-title="删除APP基础信息以及全部版本信息">删除</a></li>
 
                                         </ul>
                                     </div>
                                 </td>
-
-
-
-
                             </tr>
                         </table>
 
@@ -199,24 +204,24 @@
                             <ul class="pagination">
                                 <li th:if="${!page.isFirstPage}">
 
-                                    <a th:href="@{/dev/list(curNo=1)}" aria-label="Previous" >
+                                    <a th:href="@{/dev/list.html(curNo=1)}" aria-label="Previous" >
                                         <span aria-hidden="true">&lt;&lt;</span>
                                     </a>
                                 </li>
                                 <li th:if="${page.hasPreviousPage}">
-                                    <a  th:href="@{/dev/list(curNo=${page.prePage})}" aria-label="Previous"  >
+                                    <a  th:href="@{/dev/list.html(curNo=${page.prePage})}" aria-label="Previous"  >
                                         <span aria-hidden="true">&lt;</span>
                                     </a>
                                 </li>
-                                <li th:each="num : ${page.navigatepageNums}" th:classappend="${num==page.pageNum}?'active':''"><a th:href="@{/dev/list(curNo=${num})}" th:text="${num}" ></a></li>
+                                <li th:each="num : ${page.navigatepageNums}" th:classappend="${num==page.pageNum}?'active':''"><a th:href="@{/dev/list.html(curNo=${num})}" th:text="${num}" ></a></li>
 
                                 <li th:if="${page.hasNextPage}">
-                                    <a href="#" aria-label="Next"  th:href="@{/dev/list(curNo=${page.nextPage})}">
+                                    <a href="#" aria-label="Next"  th:href="@{/dev/list.html(curNo=${page.nextPage})}">
                                         <span aria-hidden="true">&gt;</span>
                                     </a>
                                 </li>
-                                <li th:if="${!page.isLastPage}" th:href="@{/dev/list(curNo=${page.lastPage})}">
-                                    <a href="#" aria-label="Next">
+                                <li th:if="${!page.isLastPage}" >
+                                    <a th:href="@{/dev/list.html(curNo=${page.pages})}" aria-label="Next">
                                         <span aria-hidden="true">&gt;&gt;</span>
                                     </a>
                                 </li>
@@ -242,6 +247,7 @@
         <footer th:include="dev/common/footer :: footer"></footer>
     </div>
 </div>
+
 </div>
 </body>
 <!--js -->

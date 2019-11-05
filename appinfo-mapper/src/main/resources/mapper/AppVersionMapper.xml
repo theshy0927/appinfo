@@ -19,4 +19,9 @@
     <result column="apkLocPath" jdbcType="VARCHAR" property="apkLocPath" />
     <result column="apkFileName" jdbcType="VARCHAR" property="apkFileName" />
   </resultMap>
+
+  <insert id="addVersion" keyProperty="id" useGeneratedKeys="true" parameterType="com.t248.appinfo.model.AppVersion">
+    INSERT INTO app_version (appId,versionNo,versionInfo,publishStatus,downloadLink,versionSize,createdBy,creationDate,modifyBy,modifyDate,apkLocPath,apkFileName )
+     VALUES( #{appId},#{versionNo},#{versionInfo},#{publishStatus},#{downloadLink},#{versionSize},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{apkLocPath},#{apkFileName})
+  </insert>
 </mapper>

@@ -8,15 +8,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DevIntercepter extends HandlerInterceptorAdapter {
+public class BackendIntercepter extends HandlerInterceptorAdapter {
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
         if (!request.getServletPath().matches(Const.NO_INTERCEPTOR_PATH)){
-            if (request.getSession().getAttribute("devUser")==null)
+            if (request.getSession().getAttribute("backendUser")==null)
                 throw new AppinfoException(AppinfoCode.not_login);
         }
         return true;
     }
-
 }

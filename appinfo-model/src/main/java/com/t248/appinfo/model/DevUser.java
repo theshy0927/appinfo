@@ -3,11 +3,12 @@ package com.t248.appinfo.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Table(name = "dev_user")
-public class DevUser {
+public class DevUser implements Serializable {
     /**
      * Ö÷¼üid
      */

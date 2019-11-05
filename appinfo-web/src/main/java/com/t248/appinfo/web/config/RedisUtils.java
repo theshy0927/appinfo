@@ -16,11 +16,33 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 public final class RedisUtils {
 
-    public List<CategoryDTO> getCategoryLevel( Long Id,String level){
+    /**
+     * 根据等级和父级id 获取列表
+     * @param Id
+     * @param level (c1 , c2 ,c3)
+     * @return
+     */
+    public List<CategoryDTO> getCategoryLevel( Long id,String level){
         List<CategoryDTO> allC3 = (List<CategoryDTO>)get(level);
-        List<CategoryDTO> c3 = allC3.stream().filter(c -> c.getParentId() == Id).collect(Collectors.toList());
+        List<CategoryDTO> c3 = allC3.stream().filter(c -> c.getParentId() == id).collect(Collectors.toList());
         return c3;
     }
+
+    /**
+     * 获取全部的分类  id可以parentId  为空时获取一级分类
+     * @param Id
+     * @param level (allc1 , allc2 ,allc3)
+     * @return
+     */
+    public List<CategoryDTO> getCateList( Long id,String level){
+        List<CategoryDTO> allC3 = (List<CategoryDTO>)get(level);
+        if(id==null){
+            return allC3;
+        }
+        List<CategoryDTO> c3 = allC3.stream().filter(c -> c.getParentId() == id).collect(Collectors.toList());
+        return c3;
+    }
+
 
 
     @Autowired

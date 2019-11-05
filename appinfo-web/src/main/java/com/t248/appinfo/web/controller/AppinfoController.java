@@ -1,19 +1,25 @@
 package com.t248.appinfo.web.controller;
 
+import com.t248.appinfo.dto.AppVersionDTO;
 import com.t248.appinfo.dto.CategoryDTO;
+import com.t248.appinfo.model.AppInfo;
+import com.t248.appinfo.model.DataDictionary;
+import com.t248.appinfo.service.AppVersionService;
 import com.t248.appinfo.service.AppinfoService;
 import com.t248.appinfo.web.config.RedisUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/appinfo")
+@RequestMapping("/appinfo/")
 public class AppinfoController {
 
     @Autowired
@@ -22,6 +28,8 @@ public class AppinfoController {
     @Autowired
     private RedisUtils utils;
 
+    @Autowired
+    private AppVersionService versionService;
 
 
     @RequestMapping("/CategoryLevel2")
@@ -33,6 +41,83 @@ public class AppinfoController {
 
         return utils.getCategoryLevel(categoryLevelId,"c3");
     }
+
+    private void allDataDictionary(){
+        List<DataDictionary> flaform = service.getFlaform(null);
+        utils.set("dataDictionary", flaform);
+    }
+
+        @RequestMapping("datadictionarylist.json")
+        public List<DataDictionary> getFlaFormList(String tcode){
+        if(!utils.hasKey("dataDictionary")){
+            allDataDictionary();
+        }
+            List<DataDictionary> dataDictionary = (List<DataDictionary>) utils.get("dataDictionary");
+           return dataDictionary.stream().filter(s->tcode.equals(s.getTypeCode())).collect(Collectors.toList());
+        }
+    @RequestMapping("statusName.json")
+    public DataDictionary getStatusName(Long valueId){
+        if(!utils.hasKey("dataDictionary")){
+            allDataDictionary();
+        }
+        List<DataDictionary> dataDictionary = (List<DataDictionary>) utils.get("dataDictionary");
+        return dataDictionary.stream().filter(s->"APP_STATUS".equals(s.getTypeCode())).filter(s->s.getValueId()==valueId).collect(Collectors.toList()).get(0);
+    }
+
+        @RequestMapping("categorylevellist.json")
+    public List<CategoryDTO> getCategorylevellist1(@RequestParam("pid") Long parentId,@RequestParam(name = "level",required = false
+        ,defaultValue = "allc1") String level){
+            List<CategoryDTO> allc1 = utils.getCateList(parentId, level);
+
+            return  allc1;
+        }
+
+        @RequestMapping("apkexist.json")
+        public String checkAPKNameExsits(@RequestParam(name = "APKName") String APKName){
+            if(StringUtils.isBlank(APKName)){
+                return "{\"APKName\":\"empty\"}";
+            }
+            AppInfo info = new AppInfo();
+            info.setAPKName(APKName);
+
+            boolean exits = service.checkAPKNameExsits(info);
+            if(exits){
+                return "{\"APKName\":\"exist\"}";
+            }
+            return "{\"APKName\":\"noexist\"}";
+        }
+
+        @RequestMapping("delfile.json")
+        public String delfile(@RequestParam("id") Long id,@RequestParam(value = "flag",required = false)String flag){
+            File file = null;
+            boolean bool = false;
+            if("apk".equals(flag)){
+                if(utils.hasKey("dataDictionary")){
+                    allDataDictionary();
+                }
+                AppVersionDTO appVersion = versionService.findById(id, (List<DataDictionary>) utils.get("dataDictionary"));
+                file = new File("D:\\fileupload\\" + appVersion.getDownloadLink());
+                if(file.exists()){
+                    file.delete();
+                }
+                appVersion.setDownloadLink(null);
+                appVersion.setApkLocPath(null);
+                appVersion.setApkFileName(null);
+                bool = versionService.modify(appVersion);
+
+            }else {
+
+                AppInfo app = service.getSelectOneAPP(id);
+                file = new File("D:\\fileuploa\\" + app.getLogoLocPath());
+                if (file.exists()) {
+                    file.delete();
+                }
+                app.setLogoLocPath(null);
+                app.setLogoPicPath(null);
+                bool = service.modify(app);
+            }
+            return bool?"{\"result\":\"success\"}":"{\"result\":\"failed\"}";
+        }
 
 
 }

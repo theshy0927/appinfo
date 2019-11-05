@@ -43,6 +43,9 @@
  FROM app_info AS ai
  <where>
 
+     <if test="id!=null and id!=0">
+         and id = #{id}
+     </if>
    <if test="createdBy!=null and createdBy!=''">
      and createdBy = #{createdBy}
    </if>
@@ -69,7 +72,57 @@
   </select>
 
 
+    <select id="findOne" parameterType="com.t248.appinfo.model.AppInfo" resultType="com.t248.appinfo.vo.AppinfoVO">
+        SELECT ai.*,
+        (SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`flatformId` AND typeCode="APP_FLATFORM" ) AS flatformName,
+        (SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`status` AND typeCode="APP_STATUS") AS statusName,
+        (SELECT	 categoryName FROM app_category AS ac WHERE ac.id =  ai.`categoryLevel1` ) AS cname1,
+        (SELECT	 categoryName FROM app_category AS ac WHERE ac.id =  ai.`categoryLevel2`) AS cname2,
+        (SELECT	 categoryName FROM app_category AS ac WHERE  ac.id = ai.`categoryLevel3` ) AS cname3,
+        `downloads`,
+        (SELECT `versionNO` FROM  app_version AS v WHERE v.id = ai.`versionId`) AS versionName
+        FROM app_info AS ai
+        <where>
+
+            <if test="id!=null and id!=0">
+                and id = #{id}
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                and createdBy = #{createdBy}
+            </if>
+            <if test="querySoftwareName!=null and querySoftwareName!=''">
+                and softwareName like concat("%",#{querySoftwareName},"%")
+            </if>
+            <if test="queryStatus!=null and queryStatus!=0">
+                and status=#{queryStatus}
+            </if>
+            <if test="queryFlatformId!=null and queryFlatformId!=0">
+                and flatformId=  #{queryFlatformId}
+            </if>
+            <if test="queryCategoryLevel1!=null and queryCategoryLevel1!=0">
+                and categoryLevel1=#{queryCategoryLevel1}
+            </if>
+            <if test="queryCategoryLevel2!=null and queryCategoryLevel2!=0">
+                and categoryLevel2=#{queryCategoryLevel2}
+            </if>
+            <if test="queryCategoryLevel3!=null and queryCategoryLevel3!=0">
+                and categoryLevel3=#{queryCategoryLevel3}
+            </if>
+        </where>
+
+    </select>
   <select id="getAllCategory" resultType="com.t248.appinfo.dto.CategoryDTO">
+      SELECT   ac.`id`,ac.`categoryName`,ac.`parentId` FROM app_category AS ac
+      WHERE ac.`catelevel` = #{cateLevel}
+
+      <if test="parentId != null and parentId != 0">
+          and ac.`parentId` = #{parentId}
+      </if>
+  </select>
+
+
+
+  <select id="getAppInfoCategory" resultType="com.t248.appinfo.dto.CategoryDTO">
     SELECT DISTINCT  ac.`id`,ac.`categoryName`,ac.`parentId` FROM app_info AS ai,app_category AS ac
      WHERE ac.`id` = ${cateLevel}
       <if test="parentId != null and parentId != 0">

@@ -29,6 +29,15 @@
             <artifactId>appinfo-model</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+
         <dependency>
         <groupId>com.t248</groupId>
         <artifactId>appinfo-service</artifactId>

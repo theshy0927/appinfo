@@ -12,7 +12,10 @@
 
     <artifactId>appinfo-utils</artifactId>
 
+
+
     <dependencies>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
