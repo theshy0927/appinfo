@@ -67,6 +67,8 @@ public class AppVersionService {
         versionDTO.setStatusName(collect.get(version.getPublishStatus()));
         return versionDTO;
     }
+
+
 @Transactional(readOnly = false)
     public boolean modify(AppVersionDTO appVersion) {
         AppVersion version = new AppVersion();

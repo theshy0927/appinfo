@@ -105,7 +105,8 @@ $(document).on("click",".saleSwichOpen,.saleSwichClose",function(){
 var saleSwitchAjax = function(appId,obj){
 	$.ajax({
 		type:"PUT",
-		url:appId+"/sale.json",
+		url:"/dev/"+appId+"/sale.json",
+		data:{status:obj.attr("toggle-status")},
 		dataType:"json",
 		success:function(data){
 			/*
@@ -114,58 +115,40 @@ var saleSwitchAjax = function(appId,obj){
 			 * appId:appId
 			 * errorCode:param000001
 			 */
-			if(data.errorCode === '0'){
-				if(data.resultMsg === "success"){//操作成功
+				if(data.code==200){//操作成功
 					if("open" === obj.attr("saleSwitch")){
 						//alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【上架】操作成功");
 						$("#appInfoStatus" + obj.attr("appinfoid")).html("已上架");
 						obj.className="saleSwichClose";
 						obj.html("下架");
+						obj.attr("toggle-status",4);
 						obj.attr("saleSwitch","close");
 						$("#appInfoStatus" + obj.attr("appinfoid")).css({
 							'background':'green',
-							'color':'#fff',
-							'padding':'3px',
-							'border-radius':'3px'
+							'color':"white"
 						});
-						$("#appInfoStatus" + obj.attr("appinfoid")).hide();
-						$("#appInfoStatus" + obj.attr("appinfoid")).slideDown(300);
 					}else if("close" === obj.attr("saleSwitch")){
 						//alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【下架】操作成功");
 						$("#appInfoStatus" + obj.attr("appinfoid")).html("已下架");
 						obj.className="saleSwichOpem";
 						obj.html("上架");
+						obj.attr("toggle-status",5);
 						obj.attr("saleSwitch","open");
 						$("#appInfoStatus" + obj.attr("appinfoid")).css({
 							'background':'red',
-							'color':'#fff',
-							'padding':'3px',
-							'border-radius':'3px'
+							'color':"white"
 						});
-						$("#appInfoStatus" + obj.attr("appinfoid")).hide();
-						$("#appInfoStatus" + obj.attr("appinfoid")).slideDown(300);
 					}
-				}else if(data.resultMsg === "failed"){//删除失败
+				}else{//删除失败
 					if("open" === obj.attr("saleSwitch")){
-						alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【上架】操作失败");
+						alert("【"+obj.attr("appsoftwarename")+"】的【上架】操作失败");
 					}else if("close" === obj.attr("saleSwitch")){
-						alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【下架】操作失败");
+						alert("【"+obj.attr("appsoftwarename")+"】的【下架】操作失败");
 					}
 				}
-			}else{
-				if(data.errorCode === 'exception000001'){
-					alert("对不起，系统出现异常，请联系IT管理员");
-				}else if(data.errorCode === 'param000001'){
-					alert("对不起，参数出现错误，您可能在进行非法操作");
-				}
-			}
 		},
 		error:function(data){
-			if("open" === obj.attr("saleSwitch")){
-				alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【上架】操作成功");
-			}else if("close" === obj.attr("saleSwitch")){
-				alert("恭喜您，【"+obj.attr("appsoftwarename")+"】的【下架】操作成功");
-			}
+
 		}
 	});
 };
@@ -173,8 +156,7 @@ var saleSwitchAjax = function(appId,obj){
 
 
 $(".viewApp").on("click",function(){
-	var obj = $(this);
-	window.location.href="appview/"+ obj.attr("appinfoid");
+
 });
 
 $(".deleteApp").on("click",function(){

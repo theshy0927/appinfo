@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>APP审核</title>
+    <!-- css -->
+    <link th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/css/nprogress.css}" href="../static/css/nprogress.css" rel="stylesheet">
+    <link th:href="@{/css/green.css}" href="../static/css/green.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-progressbar-3.3.4.min.css}" href="../static/css/bootstrap-progressbar-3.3.4.min.css"
+          rel="stylesheet">
+    <link th:href="@{/css/jqvmap.min.css}" href="../static/css/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/dropzone.min.css}" href="../static/css/dropzone.min.css" rel="stylesheet">
+    <link th:href="@{/css/custom.min.css}" href="../static/css/custom.min.css" rel="stylesheet">
+    <!-- Custom Style -->
+    <link th:href="@{/localcss/crmadd.css}" href="../static/localcss/crmadd.css" rel="stylesheet">
+    <link th:href="@{/localcss/crmlist.css}" href="../static/localcss/crmlist.css" rel="stylesheet">
+</head>
+<body class="nav-md footer_fixed">
+<div class="container body">
+    <div class="main_container">
+        <div th:include="backend/common/left :: left" class="col-md-3 left_col menu_fixed"></div>
+        <div th:include="backend/common/header :: header" class="top_nav"></div>
+        <div layout:fragment="content" class="right_col" role="main">
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>修改APP基础信息 <i class="fa fa-user"></i><small th:text="${backendUser.userName}"></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <!--/*@thymesVar id="appinfo" type="com.t248.appinfo.vo.AppinfoVO"*/-->
+                            <form class="form-horizontal form-label-left"    id="check">
+                                <input type="hidden" name="id" id="id" th:value="${appinfo.id}">
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName" >软件名称 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                        <input id="softwareName" class="form-control col-md-7 col-xs-12" readonly="readonly"
+                                               data-validate-length-range="20" data-validate-words="1"
+                                               name="softwareName" th:value="${appinfo.softwareName}" 
+                                               placeholder="请输入软件名称" type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="APKName">APK名称 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="APKName" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="APKName" th:value="${appinfo.APKName}" readonly="readonly">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="supportROM">支持ROM <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="supportROM" class="form-control col-md-7 col-xs-12" readonly="readonly"
+                                               name="supportROM" th:value="${appinfo.supportROM}"
+                                               data-validate-length-range="20" data-validate-words="1"
+                                               placeholder="请输入支持的ROM" type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="interfaceLanguage">界面语言 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="interfaceLanguage" class="form-control col-md-7 col-xs-12"
+                                               data-validate-length-range="20" data-validate-words="1"  readonly="readonly"
+                                               name="interfaceLanguage" th:value="${appinfo.interfaceLanguage}"
+                                               placeholder="请输入软件支持的界面语言" type="text">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareSize">软件大小 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="softwareSize" name="softwareSize" th:value="${appinfo.softwareSize}"  readonly="readonly"
+                                               data-validate-minmax="10,500"  placeholder="请输入软件大小，单位为Mb" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="downloads">下载次数 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="downloads" name="downloads" th:value="${appinfo.downloads}"  readonly="readonly"
+                                               data-validate-minmax="10,500"  placeholder="请输入下载次数" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"  >所属平台 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input  th:value="${appinfo.flatFormName}" id="fid" />
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >一级分类 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input  th:value="${appinfo.cname1}" id="cl1" readonly="readonly"/>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >二级分类 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input  th:value="${appinfo.cname2}" id="cl2" readonly="readonly"/>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >三级分类 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input  th:value="${appinfo.cname3}" id="cl3"readonly="readonly"/>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >APP状态 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="statusName" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="statusName"  th:value="${appinfo.statusName}" readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appinfo">应用简介 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+              <textarea id="appinfo" name="appinfo" 
+                        placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件的介绍。" class="form-control col-md-7 col-xs-12" th:text="${appinfo.appInfo}">
+              </textarea>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >LOGO图片 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <p th:if="${appinfo.logoPicPath==null||appinfo.logoPicPath==''}">暂无</p>
+                                        <img th:src="@{'/pic/'+${appinfo.logoPicPath}}" th:width="100px" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button type="button"  name="status" value="2" class="btn btn-success">审核通过</button>
+                                        <button  type="button" name="status" value="3" class="btn btn-success">审核不通过</button>
+                                        <button type="button" class="btn btn-primary" ><a href="javascript:history.back();" style="color: white">返回</a></button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="x_title">
+                            <h2>最新版本信息</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block;">
+                            <br>
+                            <!--/*@thymesVar id="appVersion" type="com.t248.appinfo.dto.AppVersionDTO"*/-->
+                            <div th:if="${appVersion!=null}">
+
+                            <form class="form-horizontal form-label-left">
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >版本号 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                        <input class="form-control col-md-7 col-xs-12" th:value="${appVersion.versionNo }"
+                                               type="text" readonly="readonly" >
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >版本大小 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" th:value="${appVersion.versionSize }" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >发布状态 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="hidden" name="publishStatus" id="publishStatus" value="3">预发布
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >版本简介 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+              <textarea class="form-control col-md-7 col-xs-12" th:text=" ${appVersion.versionInfo }">
+             </textarea>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >apk文件 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <p th:if="${appVersion.downloadLink==null||appVersion.downloadLink==''}">暂无</p>
+                                        <a th:href="@{/appinfo/download(downloadLink=${appVersion.downloadLink})}" th:width="100px" >下载</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br/><br/>
+                            </form>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br/><br/>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <footer th:include="backend/common/footer :: footer"></footer>
+    </div>
+</div>
+</body>
+<!--js -->
+<script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script th:src="@{/js/fastclick.js}" src="../static/js/fastclick.js"></script>
+<script th:src="@{/js/nprogress.js}" src="../static/js/nprogress.js"></script>
+<script th:src="@{/js/jquery.mCustomScrollbar.concat.min.js}"
+        src="../static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script th:src="@{/js/dropzone.js}" src="../static/js/dropzone.js"></script>
+<script th:src="@{/js/custom.min.js}" src="../static/js/custom.min.js"></script>
+<script th:src="@{/localjs/appcheck.js}"></script>
+<script layout:fragment="js">
+
+$("[name=status]").click(function(){
+    if(confirm("确认进行操作?")){
+        $.ajax({
+            url:"/backend/check",
+            data:{id:$("#id").val(),status:$(this).val()},
+            success:function (data) {
+                if(data.code==200){
+                    alert("操作成功");
+                    window.location.href="/backend/list.html";
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+});
+
+</script>
+</html>

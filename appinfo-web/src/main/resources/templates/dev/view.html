@@ -196,7 +196,7 @@
                                                 <td th:text="${appVersion.versionSize }"></td>
                                                 <td th:text="${appVersion.statusName }"></td>
                                                 <td>
-                                                    <a style="text-decoration: underline" th:if="${appVersion.downloadLink!=null && appVersion.downloadLink!=''}" th:href="@{/dev/download(downloadLink=${appVersion.downloadLink})}" th:text="${appVersion.apkFileName}"></a>
+                                                    <a style="text-decoration: underline" th:if="${appVersion.downloadLink!=null && appVersion.downloadLink!=''}" th:href="@{/appinfo/download(downloadLink=${appVersion.downloadLink})}" th:text="${appVersion.apkFileName}"></a>
                                                 </td>
                                                 <td th:text="${#dates.format(appVersion.creationDate, 'yyyy-MM-dd')}"></td>
 
@@ -226,7 +226,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-3">
-                                <button type="button" class="btn btn-primary" ><a th:href="@{/dev/list.html}" style="color: white">返回</a></button>
+                                <button type="button" class="btn btn-primary" ><a href="javascript:history.back();" style="color: white">返回</a></button>
                             </div>
                         </div>
                         <div class="clearfix"></div>

@@ -159,7 +159,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <button id="send" type="button" class="btn btn-success">保存</button>
-                                            <button type="button" class="btn btn-primary" ><a th:href="@{/dev/list.html}" style="color: white">返回</a></button>
+                                            <button type="button" class="btn btn-primary" ><a href="javascript:history.back();" style="color: white">返回</a></button>
                                         </div>
                                     </div>
                                 </form>
@@ -207,6 +207,7 @@
             success: function(data){
                 if (data.code == 200) {
                     alert('添加成功');
+                    window.location.reload();
                 }else{
                     alert(data.message);
                 }

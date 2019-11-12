@@ -86,4 +86,8 @@ public class AppinfoService {
         versionMapper.delete(version);
         return result>0;
     }
+
+    public AppInfo select(Long id){
+        return mapper.selectByPrimaryKey(id);
+    }
 }

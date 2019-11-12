@@ -1,23 +1,24 @@
-package com.t248.appinfo.dto;
+package com.t248.appinfo.solr;
 
 
 import lombok.Data;
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@SolrDocument(collection = "test")
 @Data
-public class AppinfoDTO {
-
-    /**
-     * 主键id
-     */
+public class AppinfoSolr {
+    @Id
+    @Field
     private Long id;
 
-    /**
-     * 软件名称
-     */
+    @Field
     private String softwareName;
+
 
     /**
      * APK名称（唯一）
@@ -77,4 +78,6 @@ public class AppinfoDTO {
     private String versionName;
 
     private String logoPicPath;
+
+
 }

@@ -1,9 +1,13 @@
 package com.t248.appinfo.web;
 
+import com.alibaba.druid.sql.PagerUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import com.t248.appinfo.dto.AppinfoDTO;
 import com.t248.appinfo.dto.CategoryDTO;
 import com.t248.appinfo.mapper.AppInfoMapper;
@@ -11,7 +15,16 @@ import com.t248.appinfo.mapper.AppVersionMapper;
 import com.t248.appinfo.model.AppVersion;
 import com.t248.appinfo.model.DataDictionary;
 import com.t248.appinfo.service.AppinfoService;
+import com.t248.appinfo.solr.AppinfoSolr;
+import com.t248.appinfo.utils.Pager;
+import com.t248.appinfo.utils.QueryParam;
+import com.t248.appinfo.utils.SolrQueryParamConvert;
 import com.t248.appinfo.web.config.RedisUtils;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocumentList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +32,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,4 +138,30 @@ public  class AppinfoWebApplicationTests {
         List<DataDictionary> dataDictionary = (List<DataDictionary>) utils.get("dataDictionary");
 
     }
+
+    @Test
+    public void testExpire(){
+        utils.set("test", "你好哇", 5);
+    }
+
+    @Autowired
+    private SolrClient client;
+    @Test
+    public void testSolr() throws IOException, SolrServerException {
+        SolrQuery query = new SolrQuery();
+        query.setQuery("*:*");
+        query.setFilterQueries("status:1");
+        SolrDocumentList tempresults = client.query(query).getResults();
+        int total = (int) tempresults.getNumFound();
+        query.setStart(1);
+        query.setRows(2);
+       SolrDocumentList results =  client.query(query).getResults();
+        if(!results.isEmpty()){
+            Pager<AppinfoSolr> pager = new Pager<AppinfoSolr>(total,1,2);
+            List<AppinfoSolr> appinfoSolrs = JSONArray.parseArray(JSON.toJSONString(results), AppinfoSolr.class);
+            pager.setList(appinfoSolrs);
+            System.out.println(pager);
+        }
+    }
+
 }

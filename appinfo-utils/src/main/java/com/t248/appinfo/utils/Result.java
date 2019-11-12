@@ -1,9 +1,16 @@
 package com.t248.appinfo.utils;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Result",description ="返回模型")
 public class Result {
 
+
+    @ApiModelProperty(value = "响应码")
     private Integer code;
+    @ApiModelProperty("响应信息")
     private String message;
 
     public Integer getCode() {
@@ -14,6 +21,7 @@ public class Result {
         return message;
     }
 
+    @ApiModelProperty("响应数据")
     private Object data;
 
     public Object getData() {

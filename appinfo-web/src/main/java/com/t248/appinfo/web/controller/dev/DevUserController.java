@@ -149,8 +149,6 @@ public class DevUserController {
         model.addAttribute("pageData",page.getResult());
         model.addAttribute("page",pageInfo);
         model.addAttribute("queryParam", queryParam);
-
-
         return "/dev/list";
     }
 
@@ -183,9 +181,9 @@ public class DevUserController {
     File file1 = new File("D:\\fileupload\\"+System.currentTimeMillis()+file.getOriginalFilename());
     file.transferTo(file1);
     info.setLogoLocPath(file1.getName());
+    info.setLogoPicPath(file1.getName());
     DevUser devUser = (DevUser)request.getSession().getAttribute("devUser");
     info.setCreatedBy(devUser.getId());
-    info.setLogoLocPath(file1.getName());
     info.setCreationDate(new Date());
     info.setDevId(devUser.getId());
     int result = service.addApp(info);
@@ -272,7 +270,7 @@ public class DevUserController {
         QueryParam param = new QueryParam();
         AppInfo one = service.getSelectOneAPP(version.getAppId());
         param.setId(one.getId());
-        one.setVersionId((long)versionId);
+        one.setVersionId(version.getId());
         service.modify(one);
         if(service.findOne(param)==null){
             Result.errorOf(AppinfoCode.app_not_find);
@@ -327,6 +325,21 @@ public class DevUserController {
             return Result.okOf(null);
         }
         return Result.errorOf(AppinfoCode.app_not_find);
+    }
+
+    /**
+     * 上架下架
+     */
+    @RequestMapping("{appid}/sale.json")
+    @ResponseBody
+    public Result sale(@PathVariable("appid") Long appid,@RequestParam("status")Long status){
+        AppInfo app = service.select(appid);
+        app.setStatus(status);
+        boolean modify = service.modify(app);
+        if(!modify){
+            return Result.errorOf(AppinfoCode.app_not_find);
+        }
+        return Result.okOf(null);
     }
 
 }

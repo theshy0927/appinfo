@@ -43,8 +43,10 @@ public class ExceptionHandlerController {
         }else {
             if(ex instanceof AppinfoException) {
                 model.addAttribute("message", ex.getMessage());
+                model.addAttribute("code", ((AppinfoException) ex).getCode());
             }else {
                 model.addAttribute("message", "服务器冒烟了，请你稍后再重试");
+                model.addAttribute("code", 500);
                 ex.printStackTrace();
             }
         }

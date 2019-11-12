@@ -170,7 +170,7 @@
                                 <td th:text="${l.softwareSize}"></td>
                                 <td th:text="${l.flatFormName}"></td>
                                 <td th:text="${l.cname1+'->'+l.cname2+'->'+l.cname3}"></td>
-                                <td th:text="${l.statusName}"></td>
+                                <td th:id="'appInfoStatus'+${l.id}" th:text="${l.statusName}"></td>
                                 <td th:text="${l.downloads}"></td>
                                 <td th:text="${l.versionName}"></td>
                                 <td>
@@ -184,6 +184,13 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
+
+                                            <li>
+                                                        <a th:if="${l.statusName == '审核通过' || l.statusName == '已下架'}" th:toggle-status="4" class="saleSwichOpen" saleSwitch="open" th:appinfoid="${l.id }"  th:appsoftwarename="${l.softwareName }" data-toggle="tooltip" data-placement="top" title="" data-original-title="恭喜您，您的审核已经通过，您可以点击上架发布您的APP">上架</a>
+
+                                                        <a th:if="${l.statusName == '已上架'}" class="saleSwichClose" th:toggle-status="5" saleSwitch="close" th:appinfoid="${l.id }"  th:appsoftwarename="${l.softwareName }" data-toggle="tooltip" data-placement="top" title="" data-original-title="您可以点击下架来停止发布您的APP，市场将不提供APP的下载">下架</a>
+
+                                            </li>
 
                                             <li th:if="${l.statusName=='待审核'||l.statusName=='审核未通过'||l.statusName=='已下架'}"><a   th:data-status="${l.statusName}" class="modifyAppInfo" th:href="@{'/dev/edit/'+${l.id}+'.html'}"
                                                     data-toggle="tooltip" data-placement="top" title="" data-original-title="修改APP基础信息">修改</a></li>

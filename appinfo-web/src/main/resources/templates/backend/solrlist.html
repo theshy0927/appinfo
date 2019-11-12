@@ -37,7 +37,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <form method="post" >
+                            <form method="post" th:action="@{/backend/solrlist.html}">
                                 <ul>
                                     <li>
                                         <div class="form-group">
@@ -148,7 +148,6 @@
                                 </tr>
                                 </thead>
 
-
                                 <tr role="row" th:each="l : ${pageData}">
                                     <!--/*@thymesVar id="l" type="com.t248.appinfo.dto.AppinfoDTO"*/-->
                                     <td th:text="${l.softwareName}"></td>
@@ -157,9 +156,9 @@
                                     <td th:text="${l.flatFormName}"></td>
                                     <td th:text="${l.cname1+'->'+l.cname2+'->'+l.cname3}"></td>
                                     <td th:text="${l.downloads}"></td>
-                                    <td  th:text="${l.versionName==null?'没有版本':l.versionName}"></td>
+                                    <td th:text="${l.versionName}"></td>
                                     <td>
-                                        <button type="button" class="btn btn-info" th:if="${l.versionName!=null&&l.versionName!=''}"><a  th:href="@{'/backend/appcheck/'+${l.id}+'.html'}" style="color: white">审核</a></button>
+                                        <button type="button" class="btn btn-info"><a th:href="@{'/backend/appcheck/'+${l.id}+'.html'}" style="color: white">审核</a></button>
 
                                     </td>
 
@@ -168,37 +167,36 @@
 
                                 </tr>
                             </table>
-
-
-                            <!--/*@thymesVar id="page" type="com.github.pagehelper.PageInfo"*/-->
+                            <div th:if="${page!=null}">
+                            <!--/*@thymesVar id="page" type="com.t248.appinfo.utils.Pager"*/-->
                             <nav aria-label="Page navigation">
                                 <ul class="pagination">
-                                    <li th:if="${!page.isFirstPage}">
+                                    <li th:if="${!page.firstPage}">
 
-                                        <a th:href="@{/backend/list.html(curNo=1)}" aria-label="Previous" >
+                                        <a th:href="@{/backend/solrlist.html(curNo=1)}" aria-label="Previous" >
                                             <span aria-hidden="true">&lt;&lt;</span>
                                         </a>
                                     </li>
                                     <li th:if="${page.hasPreviousPage}">
-                                        <a  th:href="@{/backend/list.html(curNo=${page.prePage})}" aria-label="Previous"  >
+                                        <a  th:href="@{/backend/solrlist.html(curNo=${page.pageNumber-1})}" aria-label="Previous"  >
                                             <span aria-hidden="true">&lt;</span>
                                         </a>
                                     </li>
-                                    <li th:each="num : ${page.navigatepageNums}" th:classappend="${num==page.pageNum}?'active':''"><a th:href="@{/backend/list.html(curNo=${num})}" th:text="${num}" ></a></li>
+                                    <li th:each="num : ${page.navigatePageNumbers}" th:classappend="${num==page.pageNumber}?'active':''"><a th:href="@{/backend/solrlist.html(curNo=${num})}" th:text="${num}" ></a></li>
 
                                     <li th:if="${page.hasNextPage}">
-                                        <a href="#" aria-label="Next"  th:href="@{/backend/list.html(curNo=${page.nextPage})}">
+                                        <a href="#" aria-label="Next"  th:href="@{/backend/solrlist.html(curNo=${page.pageNumber+1})}">
                                             <span aria-hidden="true">&gt;</span>
                                         </a>
                                     </li>
-                                    <li th:if="${!page.isLastPage}" >
-                                        <a th:href="@{/backend/list.html(curNo=${page.pages})}" aria-label="Next">
+                                    <li th:if="${!page.lastPage}" >
+                                        <a th:href="@{/backend/solrlist.html(curNo=${page.pages})}" aria-label="Next">
                                             <span aria-hidden="true">&gt;&gt;</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
-
+                            </div>
                         </div>
                     </div>
 
@@ -226,8 +224,5 @@
 <script th:src="@{/js/custom.min.js}" src="../static/js/custom.min.js"></script>
 <script th:src="@{/localjs/rollpage.js}"></script>
 <script th:src="@{/localjs/applist.js}"></script>
-<script layout:fragment="js">
-
-
-</script>
+<script layout:fragment="js"></script>
 </html>

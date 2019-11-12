@@ -32,7 +32,7 @@
     </resultMap>
 
   <select id="findApp" parameterType="com.t248.appinfo.model.AppInfo" resultType="com.t248.appinfo.dto.AppinfoDTO">
-        SELECT ai.id,`softwareName`,`APKName`,`softwareSize`,
+        SELECT ai.id,`softwareName`,`APKName`,`softwareSize`,`status`,`flatformId`,
 (SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`flatformId` AND typeCode="APP_FLATFORM" ) AS flatformName,
 (SELECT valueName  FROM data_dictionary AS d WHERE d.valueId=ai.`status` AND typeCode="APP_STATUS") AS statusName,
 (SELECT	 categoryName FROM app_category AS ac WHERE ac.id =  ai.`categoryLevel1` ) AS cname1,

@@ -9,11 +9,18 @@ import com.t248.appinfo.service.AppinfoService;
 import com.t248.appinfo.web.config.RedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -119,5 +126,19 @@ public class AppinfoController {
             return bool?"{\"result\":\"success\"}":"{\"result\":\"failed\"}";
         }
 
+
+    @RequestMapping("/download")
+    public ResponseEntity<byte[]> download(@RequestParam("downloadLink")String downloadLink, HttpServletRequest request) throws IOException {
+        File file = new File("D:\\filedownload\\"+downloadLink);
+        byte[] body = null;
+        InputStream is = new FileInputStream(file);
+        body = new byte[is.available()];
+        is.read(body);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attchement;filename=" + file.getName());
+        HttpStatus statusCode = HttpStatus.OK;
+        ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
+        return entity;
+    }
 
 }
