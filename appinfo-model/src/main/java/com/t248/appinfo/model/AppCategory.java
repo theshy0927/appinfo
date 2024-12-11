@@ -9,188 +9,188 @@ import java.util.Date;
 @Table(name = "app_category")
 public class AppCategory {
     /**
-     * 主键ID
+     * 鍒嗙被ID111
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
-     * 分类编码
+     * 路脰脌脿卤脿脗毛
      */
     private String categoryCode;
 
     /**
-     * 分类名称
+     * 路脰脌脿脙没鲁脝
      */
     private String categoryName;
 
     /**
-     * 父级节点id
+     * 赂赂录露陆脷碌茫id
      */
     private Long parentId;
 
     /**
-     * 创建者（来源于backend_user用户表的用户id）
+     * 麓麓陆篓脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     private Long createdBy;
 
     /**
-     * 创建时间
+     * 麓麓陆篓脢卤录盲
      */
     private Date creationTime;
 
     /**
-     * 更新者（来源于backend_user用户表的用户id）
+     * 赂眉脨脗脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     private Long modifyBy;
 
     /**
-     * 最新更新时间
+     * 脳卯脨脗赂眉脨脗脢卤录盲
      */
     private Date modifyDate;
 
     private Integer catelevel;
 
     /**
-     * 获取主键ID
+     * 禄帽脠隆脰梅录眉ID
      *
-     * @return id - 主键ID
+     * @return id - 脰梅录眉ID
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 设置主键ID
+     * 脡猫脰脙脰梅录眉ID
      *
-     * @param id 主键ID
+     * @param id 脰梅录眉ID
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * 获取分类编码
+     * 禄帽脠隆路脰脌脿卤脿脗毛
      *
-     * @return categoryCode - 分类编码
+     * @return categoryCode - 路脰脌脿卤脿脗毛
      */
     public String getCategoryCode() {
         return categoryCode;
     }
 
     /**
-     * 设置分类编码
+     * 脡猫脰脙路脰脌脿卤脿脗毛
      *
-     * @param categoryCode 分类编码
+     * @param categoryCode 路脰脌脿卤脿脗毛
      */
     public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode == null ? null : categoryCode.trim();
     }
 
     /**
-     * 获取分类名称
+     * 禄帽脠隆路脰脌脿脙没鲁脝
      *
-     * @return categoryName - 分类名称
+     * @return categoryName - 路脰脌脿脙没鲁脝
      */
     public String getCategoryName() {
         return categoryName;
     }
 
     /**
-     * 设置分类名称
+     * 脡猫脰脙路脰脌脿脙没鲁脝
      *
-     * @param categoryName 分类名称
+     * @param categoryName 路脰脌脿脙没鲁脝
      */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
     /**
-     * 获取父级节点id
+     * 禄帽脠隆赂赂录露陆脷碌茫id
      *
-     * @return parentId - 父级节点id
+     * @return parentId - 赂赂录露陆脷碌茫id
      */
     public Long getParentId() {
         return parentId;
     }
 
     /**
-     * 设置父级节点id
+     * 脡猫脰脙赂赂录露陆脷碌茫id
      *
-     * @param parentId 父级节点id
+     * @param parentId 赂赂录露陆脷碌茫id
      */
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
     /**
-     * 获取创建者（来源于backend_user用户表的用户id）
+     * 禄帽脠隆麓麓陆篓脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      *
-     * @return createdBy - 创建者（来源于backend_user用户表的用户id）
+     * @return createdBy - 麓麓陆篓脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     public Long getCreatedBy() {
         return createdBy;
     }
 
     /**
-     * 设置创建者（来源于backend_user用户表的用户id）
+     * 脡猫脰脙麓麓陆篓脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      *
-     * @param createdBy 创建者（来源于backend_user用户表的用户id）
+     * @param createdBy 麓麓陆篓脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
     /**
-     * 获取创建时间
+     * 禄帽脠隆麓麓陆篓脢卤录盲
      *
-     * @return creationTime - 创建时间
+     * @return creationTime - 麓麓陆篓脢卤录盲
      */
     public Date getCreationTime() {
         return creationTime;
     }
 
     /**
-     * 设置创建时间
+     * 脡猫脰脙麓麓陆篓脢卤录盲
      *
-     * @param creationTime 创建时间
+     * @param creationTime 麓麓陆篓脢卤录盲
      */
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
     /**
-     * 获取更新者（来源于backend_user用户表的用户id）
+     * 禄帽脠隆赂眉脨脗脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      *
-     * @return modifyBy - 更新者（来源于backend_user用户表的用户id）
+     * @return modifyBy - 赂眉脨脗脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     public Long getModifyBy() {
         return modifyBy;
     }
 
     /**
-     * 设置更新者（来源于backend_user用户表的用户id）
+     * 脡猫脰脙赂眉脨脗脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      *
-     * @param modifyBy 更新者（来源于backend_user用户表的用户id）
+     * @param modifyBy 赂眉脨脗脮脽拢篓脌麓脭麓脫脷backend_user脫脙禄搂卤铆碌脛脫脙禄搂id拢漏
      */
     public void setModifyBy(Long modifyBy) {
         this.modifyBy = modifyBy;
     }
 
     /**
-     * 获取最新更新时间
+     * 禄帽脠隆脳卯脨脗赂眉脨脗脢卤录盲
      *
-     * @return modifyDate - 最新更新时间
+     * @return modifyDate - 脳卯脨脗赂眉脨脗脢卤录盲
      */
     public Date getModifyDate() {
         return modifyDate;
     }
 
     /**
-     * 设置最新更新时间
+     * 脡猫脰脙脳卯脨脗赂眉脨脗脢卤录盲
      *
-     * @param modifyDate 最新更新时间
+     * @param modifyDate 脳卯脨脗赂眉脨脗脢卤录盲
      */
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;

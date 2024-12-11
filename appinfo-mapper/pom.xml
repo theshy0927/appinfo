@@ -15,7 +15,7 @@
 
     <properties>
         <java.version>${java.version}</java.version>
-        <mysql.version>5.1.40</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
     </properties>
 
 
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
+            <version>8.0.16</version>
         </dependency>
 
 
